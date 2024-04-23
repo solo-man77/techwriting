@@ -1,0 +1,59 @@
+openapi: 3.0.1
+info:
+  description: New json based user endpoint.
+  title: Tech writer 
+  version: '0.1'
+servers:
+  - url: https://
+paths:
+  /user:
+    post:
+      description: 'Adds a new user to the system '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NewUserResponse'
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+components:
+  schemas:
+    User:
+      type: object
+      title: User
+      properties:
+        name:
+          type: string
+        age: 
+          type: integer
+          description: age
+        type:
+          type: string
+          description: 'some type'
+          items:
+            enum:
+              - casual
+              - admin
+              - vendor
+              - buyer
+        region:
+          type: string
+          description: 'blah blah'
+
+    NewUserResponse:
+      type: object
+      title: New User Response
+      properties:
+        id:
+          type: string
+          description: 'automatically generated'
+          
